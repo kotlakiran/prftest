@@ -9,7 +9,6 @@
 	<groupId>com.lazerycode.jmeter1</groupId>
 	<version>DEV-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
 	<description>
         Executes a JMeter test.
 

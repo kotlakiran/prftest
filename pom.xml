@@ -5,8 +5,8 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>jmeter-maven-plugin-example</artifactId>
-	<groupId>com.lazerycode.jmeter</groupId>
+	<artifactId>jmeter-maven-plugin-example1</artifactId>
+	<groupId>com.lazerycode.jmeter1</groupId>
 	<version>DEV-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
@@ -34,6 +34,19 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0.4</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/kg.apc/cmdrunner -->
+		<dependency>
+			<groupId>kg.apc</groupId>
+			<artifactId>cmdrunner</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/kg.apc/jmeter-plugins-manager -->
+		<dependency>
+			<groupId>kg.apc</groupId>
+			<artifactId>jmeter-plugins-manager</artifactId>
+			<version>0.1</version>
+		</dependency>
+
 	</dependencies>
 
 	<profiles>
@@ -44,10 +57,16 @@
 				<plugins>
 					<!-- execute JMeter test -->
 					<plugin>
-						 <groupId>com.lazerycode.jmeter</groupId>
-            <artifactId>jmeter-maven-plugin</artifactId>
-            <version>2.6.0</version>
+						<groupId>com.lazerycode.jmeter</groupId>
+						<artifactId>jmeter-maven-plugin</artifactId>
+						<version>3.0.0</version>
 						<executions>
+							<execution>
+								<id>configuration</id>
+								<goals>
+									<goal>configure</goal>
+								</goals>
+							</execution>
 							<execution>
 								<id>jmeter-test</id>
 								<goals>
@@ -57,10 +76,10 @@
 						</executions>
 						<configuration>
 
-                        <jmeterExtensions>
+							<jmeterExtensions>
 								<artifact>org.apache.activemq:activemq-all:jar:5.15.2</artifact>
-							<artifact>kg.apc:jmeter-plugins-casutg:2.4</artifact>
-							<artifact>org.apache.logging.log4j:log4j-slf4j-impl:2.11.2</artifact>
+								<artifact>kg.apc:jmeter-plugins-casutg:2.4</artifact>
+								<artifact>org.apache.logging.log4j:log4j-slf4j-impl:2.11.2</artifact>
 
 							</jmeterExtensions>
 
@@ -69,18 +88,18 @@
 
 
 							<ignoreResultFailures>true</ignoreResultFailures>
-							 <excludedArtifacts>
-                             <exclusion>commons-pool2:commons-pool2</exclusion>
-                             <exclusion>commons-math3:commons-math3</exclusion>
-                             <exclusion>org.slf4j:slf4j-nop</exclusion>
-                             <exclusion>logkit:logkit</exclusion>
-                             <exclusion>avalon-logkit:avalon-logkit</exclusion>
-                             <exclusion>jdom:jdom</exclusion>
-                             <exclusion>log4j:log4j</exclusion>
-                             <exclusion>commons-logging:commons-logging</exclusion>
-                             <exclusion>excalibur-logger:excalibur-logger</exclusion>
-                             <exclusion>org.apache.logging.log4j:log4j-slf4j-impl</exclusion>
-                        </excludedArtifacts>
+							<excludedArtifacts>
+								<exclusion>commons-pool2:commons-pool2</exclusion>
+								<exclusion>commons-math3:commons-math3</exclusion>
+								<exclusion>org.slf4j:slf4j-nop</exclusion>
+								<exclusion>logkit:logkit</exclusion>
+								<exclusion>avalon-logkit:avalon-logkit</exclusion>
+								<exclusion>jdom:jdom</exclusion>
+								<exclusion>log4j:log4j</exclusion>
+								<exclusion>commons-logging:commons-logging</exclusion>
+								<exclusion>excalibur-logger:excalibur-logger</exclusion>
+								<exclusion>org.apache.logging.log4j:log4j-slf4j-impl</exclusion>
+							</excludedArtifacts>
 						</configuration>
 					</plugin>
 

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>jmeter-maven-plugin-example</artifactId>
+	<groupId>com.lazerycode.jmeter</groupId>
+	<version>DEV-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<description>
+        Executes a JMeter test.
+
+        Invoke with "mvn verify -Pperformance"
+    </description>
+
+	<properties>
+		<webapp.protocol>http</webapp.protocol>
+		<webapp.host>www.mozilla.com</webapp.host>
+		<webapp.port>80</webapp.port>
+		<webapp.uris>${project.basedir}/src/test/uris/uris.txt</webapp.uris>
+		<jmeter.analysis.maven.plugin.version>1.0.6</jmeter.analysis.maven.plugin.version>
+		<jmeter-maven-plugin.version>2.0.3</jmeter-maven-plugin.version>
+		<test.duration>30</test.duration>
+		<test.threads>10</test.threads>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.4</version>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+
+		<profile>
+			<id>performance</id>
+			<build>
+				<plugins>
+					<!-- execute JMeter test -->
+					<plugin>
+						 <groupId>com.lazerycode.jmeter</groupId>
+            <artifactId>jmeter-maven-plugin</artifactId>
+            <version>2.6.0</version>
+						<executions>
+							<execution>
+								<id>jmeter-test</id>
+								<goals>
+									<goal>jmeter</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+
+                        <jmeterExtensions>
+								<artifact>org.apache.activemq:activemq-all:jar:5.15.2</artifact>
+							<artifact>kg.apc:jmeter-plugins-casutg:2.4</artifact>
+							<artifact>org.apache.logging.log4j:log4j-slf4j-impl:2.11.2</artifact>
+
+							</jmeterExtensions>
+
+							<downloadExtensionDependencies>true</downloadExtensionDependencies>
+
+
+
+							<ignoreResultFailures>true</ignoreResultFailures>
+							 <excludedArtifacts>
+                             <exclusion>commons-pool2:commons-pool2</exclusion>
+                             <exclusion>commons-math3:commons-math3</exclusion>
+                             <exclusion>org.slf4j:slf4j-nop</exclusion>
+                             <exclusion>logkit:logkit</exclusion>
+                             <exclusion>avalon-logkit:avalon-logkit</exclusion>
+                             <exclusion>jdom:jdom</exclusion>
+                             <exclusion>log4j:log4j</exclusion>
+                             <exclusion>commons-logging:commons-logging</exclusion>
+                             <exclusion>excalibur-logger:excalibur-logger</exclusion>
+                             <exclusion>org.apache.logging.log4j:log4j-slf4j-impl</exclusion>
+                        </excludedArtifacts>
+						</configuration>
+					</plugin>
+
+
+
+
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<!-- in case we want to use a SNAPSHOT version of the jmeter-maven-plugin -->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>sonatype-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>
